@@ -1,5 +1,4 @@
 import {
-  Alert,
   Divider,
   Grid,
   List,
@@ -10,7 +9,6 @@ import {
 } from '@mui/material';
 import { SemiCircleProgress } from 'react-semicircle-progressbar';
 import CircleIcon from '@mui/icons-material/Circle';
-import { useEffect, useState } from 'react';
 
 const classes = {
   list: {
