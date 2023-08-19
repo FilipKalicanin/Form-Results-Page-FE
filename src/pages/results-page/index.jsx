@@ -24,7 +24,6 @@ const classes = {
   page: {
     width: '100vw',
     overflow: 'auto',
-    maxHeight: '100vh',
   },
   mainContainer: {
     backgroundColor: `${theme.palette.basic.main}`,
@@ -110,35 +109,44 @@ const ResultsPage = () => {
   const [affinityModal, setAffinityModal] = useState(false);
   const [modalTextInput, setModalTextInput] = useState('');
   const [loading, setLoading] = useState(true);
-  const [userData, setUserData] = useState(null);
+  // const [userData, setUserData] = useState(null);
   const { user_id } = useParams();
   const client_id = Cookies.get('access_token');
   const [error, setError] = useState(null);
   const [warningError, setWarningError] = useState(false);
+  const userData = {
+    score: 48,
+    strengths: ['asdasda', '-daaaaaaaaaadadada', 'dasdasdasdasdasd'],
+    weaknesses: [
+      'dddddddddddddddd',
+      'dasdadadasdasdadasdasd',
+      'dddddddddddddddd',
+    ],
+    warning: 'DOODOODODODODOD',
+  };
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await axios.get(`/api/results/${user_id}`);
+  //       setUserData(response.data.data);
+  //       if (response.data.data.warning) {
+  //         setWarningError(true);
+  //         setTimeout(() => {
+  //           setWarningError(null);
+  //         }, 5000);
+  //       }
+  //       setLoading(false);
+  //     } catch (error) {
+  //       setError(error);
+  //       setTimeout(() => {
+  //         setError(null);
+  //       }, 5000);
+  //       setLoading(false);
+  //     }
+  //   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(`/api/results/${user_id}`);
-        setUserData(response.data.data);
-        if (response.data.data.warning) {
-          setWarningError(true);
-          setTimeout(() => {
-            setWarningError(null);
-          }, 5000);
-        }
-        setLoading(false);
-      } catch (error) {
-        setError(error);
-        setTimeout(() => {
-          setError(null);
-        }, 5000);
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, [user_id]);
+  //   fetchData();
+  // }, [user_id]);
 
   const toggleModal = () => {
     setAffinityModal(!affinityModal);
@@ -207,7 +215,7 @@ const ResultsPage = () => {
             Logout
           </Button>
         </Grid>
-        <Grid item sx={{ width: '95%', alignItems: 'start' }}>
+        <Grid item sx={{ width: '100%', ml: '2%', alignItems: 'start' }}>
           <Button
             startIcon={<ArrowBack />}
             onClick={() => navigate('/')}
@@ -216,7 +224,7 @@ const ResultsPage = () => {
             Back
           </Button>
         </Grid>
-        {loading ? (
+        {/* {loading ? (
           <Grid
             item
             sx={{
@@ -281,34 +289,47 @@ const ResultsPage = () => {
                   </Typography>
                 </Grid>
               )}
+            </Grid> */}
+        <Grid item sx={classes.form_wrapper}>
+          {userData ? (
+            <Result result={userData} />
+          ) : (
+            <Grid item sx={{ display: 'flex', justifyContent: 'center' }}>
+              <Typography variant='h5' sx={{ color: 'white' }}>
+                No Data Fetched
+              </Typography>
             </Grid>
-            <Grid
-              item
-              xs={12}
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
+          )}
+        </Grid>
+        <Grid
+          item
+          xs={12}
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            position: !mobileMid ? 'fixed' : undefined,
+            bottom: '1rem',
+          }}
+        >
+          <Button
+            variant='outlined'
+            sx={classes.affinityBtn}
+            onClick={() => toggleModal()}
+          >
+            <img
+              alt='affinity_logo'
+              src={affinity_logo}
+              style={{
+                width: mobileMid ? 'auto' : 'auto',
+                height: mobileMid ? '56px' : '56px',
+                cursor: 'pointer',
               }}
-            >
-              <Button
-                variant='outlined'
-                sx={classes.affinityBtn}
-                onClick={() => toggleModal()}
-              >
-                <img
-                  alt='affinity_logo'
-                  src={affinity_logo}
-                  style={{
-                    width: mobileMid ? 'auto' : 'auto',
-                    height: mobileMid ? '56px' : '56px',
-                    cursor: 'pointer',
-                  }}
-                />
-              </Button>
-            </Grid>
-          </>
-        )}
+            />
+          </Button>
+        </Grid>
+        {/* </>
+        )} */}
       </Grid>
       <Dialog
         open={affinityModal}
@@ -328,10 +349,12 @@ const ResultsPage = () => {
             container
             direction='column'
             spacing={2}
-            sx={{ background: 'white', padding: '10px', borderRadius: '20px' }}
+            sx={{ background: 'white', padding: '15px', borderRadius: '20px' }}
           >
             <Grid item sx={classes.iconContainer}>
-              <Typography>Affinity</Typography>
+              <Typography variant='h5' sx={{ fontWeight: 'bold' }}>
+                Affinity
+              </Typography>
               <CloseIcon
                 sx={classes.closeIconStyling}
                 onClick={() => toggleModal()}
@@ -344,6 +367,11 @@ const ResultsPage = () => {
                 placeholder='https://example.com'
                 value={modalTextInput}
                 onChange={(e) => setModalTextInput(e.target.value)}
+                inputProps={{
+                  style: {
+                    height: '8px',
+                  },
+                }}
               />
               <Button
                 variant='outlined'
@@ -355,7 +383,7 @@ const ResultsPage = () => {
                   src={affinity_logo}
                   style={{
                     width: mobileMid ? 'auto' : 'auto',
-                    height: mobileMid ? '35px' : '35px',
+                    height: mobileMid ? '41px' : '41px',
                     cursor: 'pointer',
                   }}
                 />

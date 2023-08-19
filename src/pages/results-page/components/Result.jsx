@@ -14,14 +14,14 @@ const classes = {
   list: {
     backgroundColor: '#D1FAE5',
     borderRadius: '10px',
-    borderLeft: '10px solid #047857',
+    borderLeft: '5px solid #047857',
     marginTop: '15px',
     marginBottom: '15px',
   },
   list_weakness: {
     backgroundColor: '#FFE4E6',
     borderRadius: '10px',
-    borderLeft: '10px solid #BE123C',
+    borderLeft: '5px solid #BE123C',
     marginTop: '15px',
     marginBottom: '15px',
   },
@@ -43,7 +43,6 @@ const Result = ({ result }) => {
       justifyContent='center'
       direction='column'
       sx={classes.results_box}
-      spacing={2}
     >
       <Grid item xs={12}>
         <Typography variant='h4' sx={{ color: 'black', fontWeight: 'bold' }}>
@@ -54,13 +53,13 @@ const Result = ({ result }) => {
         <SemiCircleProgress
           percentage={result.score ? result.score : 0}
           size={{
-            width: 200,
+            width: 250,
             height: 200,
           }}
-          fontStyle={{ fontSize: '16px', fill: '#2EA140' }}
+          fontStyle={{ fontSize: '16px', fill: '#047857' }}
           hasBackground={true}
           strokeWidth={8}
-          strokeColor='#2EA140'
+          strokeColor='#047857'
           bgStrokeColor='#E5E7EB'
         />
       </Grid>
@@ -79,6 +78,7 @@ const Result = ({ result }) => {
               flexDirection: 'column',
               justifyContent: 'flex-start',
               width: '100%',
+              margin: '15px 0 15px 0',
             }}
           >
             <Typography
@@ -94,7 +94,13 @@ const Result = ({ result }) => {
                       <CircleIcon sx={{ fontSize: '8px', fill: 'black' }} />
                     </ListItemIcon>
                     <ListItemText>
-                      <Typography sx={{ fontSize: '14px', color: 'black' }}>
+                      <Typography
+                        sx={{
+                          fontSize: '14px',
+                          color: 'black',
+                          fontWeight: 'bold',
+                        }}
+                      >
                         {result}
                       </Typography>
                     </ListItemText>
@@ -121,6 +127,7 @@ const Result = ({ result }) => {
               flexDirection: 'column',
               justifyContent: 'flex-start',
               width: '100%',
+              margin: '15px 0 0 0',
             }}
           >
             <Typography
@@ -128,7 +135,7 @@ const Result = ({ result }) => {
             >
               Weaknesses
             </Typography>
-            <List sx={classes.list}>
+            <List sx={classes.list_weakness}>
               {result.weaknesses.map((result, index) => {
                 return (
                   <ListItem sx={{ padding: '0px 16px' }} key={index}>
@@ -136,7 +143,13 @@ const Result = ({ result }) => {
                       <CircleIcon sx={{ fontSize: '8px', fill: 'black' }} />
                     </ListItemIcon>
                     <ListItemText>
-                      <Typography sx={{ fontSize: '14px', color: 'black' }}>
+                      <Typography
+                        sx={{
+                          fontSize: '14px',
+                          color: 'black',
+                          fontWeight: 'bold',
+                        }}
+                      >
                         {result}
                       </Typography>
                     </ListItemText>
@@ -144,11 +157,6 @@ const Result = ({ result }) => {
                 );
               })}
             </List>
-          </Grid>
-          <Grid item sx={{ width: '100%' }}>
-            <Divider
-              sx={{ height: '1px', backgroundColor: '#E5E7EB', width: '100%' }}
-            />
           </Grid>
         </>
       )}
