@@ -2,6 +2,8 @@ import { Box, Grid, Slider, Typography, useMediaQuery } from '@mui/material';
 import { theme } from '../../../../styles/Theme';
 import CustomSwitchWithLabels from '../helpers/SwitchComponent';
 import TextInputComponent from '../helpers/TextInputComponent';
+import TripleCustomSwitchWithLabels from '../helpers/TripleSwitchComponent';
+import React, { useState, useEffect } from 'react';
 
 const classes = {
   labelWrapper: {
@@ -28,6 +30,7 @@ const classes = {
 const STEP_7_OPTIONAL_CTO_OVERRIDES = ({ formik }) => {
   const mobileMid = useMediaQuery(theme.breakpoints.down('lg'));
 
+  const [hideTooltip, setHideTooltip] = React.useState(true);
   return (
     <Grid container spacing={mobileMid ? 3 : 5} justifyContent='space-evenly'>
       <Grid
@@ -126,48 +129,85 @@ const STEP_7_OPTIONAL_CTO_OVERRIDES = ({ formik }) => {
           formik_props={formik}
         />
       </Grid>
+
+
+
+
+
+
       <Grid item lg={12} md={12} sm={12} xs={12}>
-        <Typography sx={classes.label}>Prior Founder Roles:</Typography>
-        <Box
-          display='flex'
-          flexDirection='row'
-          alignItems='center'
-          justifyContent='flex-start'
-          width={mobileMid ? '100%' : '25%'}
-          sx={{ margin: '0 auto' }}
-        >
-          <Slider
-            id='ctofounder'
-            name='ctofounder'
-            value={formik.values.ctofounder || 0}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            error={formik.touched.ctofounder && formik.errors.ctofounder}
-            marks
-            max={5}
-            min={0}
-            size={mobileMid ? 'small' : 'medium'}
-            valueLabelDisplay='auto'
-            sx={{
-              width: mobileMid ? '185px' : undefined,
-              borderRadius: 0,
-              '& .MuiSlider-rail': {
-                height: 10,
-                borderRadius: 0,
-                color: '#9A8CFF',
-              },
-              '& .MuiSlider-track': {
-                height: 10,
-                borderRadius: 0,
-                color: '#9A8CFF',
-              },
-              '& .MuiSlider-thumb': {
-                color: '#9A8CFF',
-              },
-            }}
-          />
-        </Box>
-      </Grid>
+  <Typography sx={classes.label}>Prior Founder Roles:</Typography>
+  <Box
+    display='flex'
+    flexDirection='row'
+    alignItems='center'
+    justifyContent='flex-start'
+    width={mobileMid ? '100%' : '25%'}
+    sx={{ margin: '0 auto' }}
+  >
+
+
+
+<Slider
+  id='ctofounder'
+  name='ctofounder'
+  value={formik.values.ctofounder || 0}
+  onChange={(event, value) => {
+    formik.handleChange(event);
+    setHideTooltip(value === -1);
+  }}
+  onBlur={formik.handleBlur}
+  error={formik.touched.ctofounder && formik.errors.ctofounder}
+  marks={[
+    { value: 0, label: '0' },
+    { value: 1, label: '1' },
+    { value: 2, label: '2' },
+    { value: 3, label: '3' },
+    { value: 4, label: '4' },
+    { value: 5, label: '5' },
+  ]}
+  max={5}
+  min={-1}
+  size={mobileMid ? 'small' : 'medium'}
+  valueLabelDisplay='auto'
+  valueLabelFormat={(value) => value !== -1 ? value : ''}
+  sx={{
+    width: mobileMid ? '185px' : undefined,
+    borderRadius: 0,
+    '& .MuiSlider-rail': {
+      height: 10,
+      borderRadius: 0,
+      color: formik.values.ctofounder === -1 ? 'grey' : '#9A8CFF',
+    },
+    '& .MuiSlider-track': {
+      height: 10,
+      borderRadius: 0,
+      color: formik.values.ctofounder === -1 ? 'grey' : '#9A8CFF',
+    },
+    '& .MuiSlider-thumb': {
+      color: formik.values.ctofounder === -1 ? 'grey' : '#9A8CFF',
+    },
+    '& .MuiSlider-valueLabelOpen': {
+      display: hideTooltip ? 'none' : 'flex',
+    },
+  }}
+/>
+
+
+  </Box>
+</Grid>
+
+
+
+
+
+
+
+
+
+
+
+
       <Grid
         item
         xs={12}
@@ -187,12 +227,13 @@ const STEP_7_OPTIONAL_CTO_OVERRIDES = ({ formik }) => {
             <Typography sx={classes.label}>Top-100 Uni?</Typography>
           </Grid>
           <Grid item>
-            <CustomSwitchWithLabels
+            <TripleCustomSwitchWithLabels
               id='ctotop100'
               name='ctotop100'
               checked={formik.values.ctotop100}
               onChange={formik.handleChange}
             />
+       
           </Grid>
         </Grid>
       </Grid>
@@ -211,16 +252,17 @@ const STEP_7_OPTIONAL_CTO_OVERRIDES = ({ formik }) => {
           alignItems='center'
           justifyContent='center'
         >
-          <Grid item sx={{ mt: '-25px' }}>
+          <Grid item >
             <Typography sx={classes.label}>Relevant Degree?</Typography>
           </Grid>
           <Grid item>
-            <CustomSwitchWithLabels
+          <TripleCustomSwitchWithLabels
               id='ctodegree'
               name='ctodegree'
               checked={formik.values.ctodegree}
               onChange={formik.handleChange}
             />
+            
           </Grid>
         </Grid>
       </Grid>
@@ -243,7 +285,7 @@ const STEP_7_OPTIONAL_CTO_OVERRIDES = ({ formik }) => {
             <Typography sx={classes.label}>MBA?</Typography>
           </Grid>
           <Grid item>
-            <CustomSwitchWithLabels
+            <TripleCustomSwitchWithLabels
               id='ctomba'
               name='ctomba'
               checked={formik.values.ctomba}
@@ -266,14 +308,16 @@ const STEP_7_OPTIONAL_CTO_OVERRIDES = ({ formik }) => {
           direction='column'
           alignItems='center'
           justifyContent='center'
+         
+          
         >
-          <Grid item sx={{ mt: '-25px' }}>
+          <Grid item  sx={{mt:'-25px'}} >
             <Typography
               sx={classes.label}
             >{`Tech Skills (LinkedIn)?`}</Typography>
           </Grid>
           <Grid item>
-            <CustomSwitchWithLabels
+            <TripleCustomSwitchWithLabels
               id='ctotechskills'
               name='ctotechskills'
               checked={formik.values.ctotechskills}

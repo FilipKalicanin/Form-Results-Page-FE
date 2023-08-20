@@ -9,6 +9,8 @@ import {
 } from '@mui/material';
 import { SemiCircleProgress } from 'react-semicircle-progressbar';
 import CircleIcon from '@mui/icons-material/Circle';
+import CustomSemiCircleProgressWrapper from './CustomSemiCircleProgressWrapper.jsx';
+
 
 const classes = {
   list: {
@@ -21,7 +23,7 @@ const classes = {
   list_weakness: {
     backgroundColor: '#FFE4E6',
     borderRadius: '10px',
-    borderLeft: '5px solid #BE123C',
+    borderLeft: '6px solid #BE123C',
     marginTop: '15px',
     marginBottom: '15px',
   },
@@ -30,10 +32,15 @@ const classes = {
     borderRadius: '20px',
     padding: '30px',
     width: '100%',
-    maxWidth: '520px',
+    maxWidth: '560px',
     margin: '0 auto',
   },
+  contentInside:{
+    width: '100%',
+    maxWidth:'435px',
+  }
 };
+
 
 const Result = ({ result }) => {
   return (
@@ -44,45 +51,27 @@ const Result = ({ result }) => {
       direction='column'
       sx={classes.results_box}
     >
+      <div className={classes.contentInside}>
       <Grid item xs={12}>
-        <Typography variant='h4' sx={{ color: 'black', fontWeight: 'bold' }}>
+        <Typography variant='h4'  align='center' sx={{ color: 'black', fontWeight: 'bold' ,marginTop:'5px' }}>
           Results
         </Typography>
       </Grid>
       <Grid
         item
         xs={12}
-        sx={{ position: 'relative', padding: 'none', maxHeight: '250px' }}
+        container  
+        justifyContent='center'
+        sx={{ position: 'relative', padding: 'none', maxHeight: '275px' , marginBottom:'-30px'}}
       >
-        <SemiCircleProgress
-          percentage={result.score ? result.score : 0}
-          size={{
-            width: 300,
-            height: 300,
-          }}
-          fontStyle={{ fontSize: '16px', fill: '#047857' }}
-          hasBackground={true}
-          strokeWidth={8}
-          strokeColor='#047857'
-          bgStrokeColor='#E5E7EB'
-        />
-        <Typography
-          sx={{
-            position: 'absolute',
-            top: 115,
-            left: 110,
-            fontSize: '28px',
-            fontWeight: 'bold',
-            color: '#000000',
-          }}
-        >
-          Score
-        </Typography>
+     <CustomSemiCircleProgressWrapper score={result.score}/>
+       
       </Grid>
       <Grid item sx={{ width: '100%' }}>
-        <Divider
-          sx={{ height: '1px', backgroundColor: '#E5E7EB', width: '100%' }}
+              <Divider
+          sx={{ height: '1px', backgroundColor: '#E5E7EB', width: '100%', marginTop: '10px', marginBottom: '15px' }}
         />
+
       </Grid>
       {result.strengths && result.strengths.length > 0 && (
         <>
@@ -98,7 +87,7 @@ const Result = ({ result }) => {
             }}
           >
             <Typography
-              sx={{ fontSize: '24px', fontWeight: 'bold', color: 'black' }}
+              sx={{ fontSize: '25px', fontWeight: 'bold', color: 'black' }}
             >
               Strengths
             </Typography>
@@ -112,9 +101,9 @@ const Result = ({ result }) => {
                     <ListItemText>
                       <Typography
                         sx={{
-                          fontSize: '14px',
+                          fontSize: '16px',
                           color: 'black',
-                          fontWeight: 'bold',
+                          fontWeight: '650',
                         }}
                       >
                         {result}
@@ -126,9 +115,9 @@ const Result = ({ result }) => {
             </List>
           </Grid>
           <Grid item sx={{ width: '100%' }}>
-            <Divider
-              sx={{ height: '1px', backgroundColor: '#E5E7EB', width: '100%' }}
-            />
+          <Divider
+          sx={{ height: '1px', backgroundColor: '#E5E7EB', width: '100%', marginTop: '10px', marginBottom: '15px' }}
+        />
           </Grid>
         </>
       )}
@@ -147,7 +136,7 @@ const Result = ({ result }) => {
             }}
           >
             <Typography
-              sx={{ fontSize: '24px', fontWeight: 'bold', color: 'black' }}
+              sx={{ fontSize: '25px', fontWeight: 'bold', color: 'black' }}
             >
               Weaknesses
             </Typography>
@@ -161,9 +150,9 @@ const Result = ({ result }) => {
                     <ListItemText>
                       <Typography
                         sx={{
-                          fontSize: '14px',
+                          fontSize: '16px',
                           color: 'black',
-                          fontWeight: 'bold',
+                          fontWeight: '650',
                         }}
                       >
                         {result}
@@ -173,9 +162,11 @@ const Result = ({ result }) => {
                 );
               })}
             </List>
+           
           </Grid>
         </>
       )}
+       </div>
     </Grid>
   );
 };

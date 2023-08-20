@@ -65,7 +65,7 @@ const CustomSwitchWithLabels = ({ checked, onChange, name, id }) => {
             transform: 'translateY(-50%)',
             fontSize: '13px',
             color: '#FFFFFF',
-            pointerEvents: 'none', // Add this line
+            pointerEvents: 'none', 
           }}
         >
           YES
@@ -80,7 +80,7 @@ const CustomSwitchWithLabels = ({ checked, onChange, name, id }) => {
             transform: 'translateY(-50%)',
             fontSize: '13px',
             color: '#FFFFFF',
-            pointerEvents: 'none', // Add this line
+            pointerEvents: 'none', 
           }}
         >
           NO

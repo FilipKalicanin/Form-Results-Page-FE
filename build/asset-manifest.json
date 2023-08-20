@@ -1,6 +1,7 @@
 {
   "files": {
-    "main.js": "/static/js/main.43faf33e.js",
+    "main.js": "/static/js/main.64c174dc.js",
+    "static/media/affinity_logo.png": "/static/media/affinity_logo.b5f0559203ffea384623.png",
     "static/media/e1logo.svg": "/static/media/e1logo.084260ee9b5cca4c5635263bd1037cba.svg",
     "static/media/Sector-Business Model-LIGHT PURPLE.svg": "/static/media/Sector-Business Model-LIGHT PURPLE.ae02079c5efaef86b7b1f6ecf6ec3ad9.svg",
     "static/media/Sector-Business Model-PURPLE.svg": "/static/media/Sector-Business Model-PURPLE.c768c246a49bce4323cd1d78797b1d01.svg",
@@ -30,9 +31,9 @@
     "static/media/Optional CTO Overrides-LIGHT PURPLE.svg": "/static/media/Optional CTO Overrides-LIGHT PURPLE.c91738313a6601a35cf169d9ec19938e.svg",
     "static/media/Optional CTO Overrides-PURPLE.svg": "/static/media/Optional CTO Overrides-PURPLE.4685436517bf162551c3c75010e1c2da.svg",
     "static/media/Optional-CTO-Overrides-GREY.svg": "/static/media/Optional-CTO-Overrides-GREY.2ec9076619d3a4b25247ef7afcda79d1.svg",
-    "main.43faf33e.js.map": "/static/js/main.43faf33e.js.map"
+    "main.64c174dc.js.map": "/static/js/main.64c174dc.js.map"
   },
   "entrypoints": [
-    "static/js/main.43faf33e.js"
+    "static/js/main.64c174dc.js"
   ]
 }

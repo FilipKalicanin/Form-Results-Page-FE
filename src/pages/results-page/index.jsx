@@ -25,13 +25,7 @@ const classes = {
     width: '100vw',
     overflow: 'auto',
   },
-  mainContainer: {
-    backgroundColor: `${theme.palette.basic.main}`,
-    borderRadius: '10px',
-    padding: '2rem 3rem 2rem 3rem',
-    boxShadow:
-      'rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px',
-  },
+
   bold: {
     fontWeight: 'bold',
   },
@@ -100,6 +94,11 @@ const classes = {
     justifyContent: 'space-between',
     alignItems: 'center',
   },
+  contentInside: {
+    maxWidth: '420px',
+    width: '100%', 
+},
+
 };
 
 const ResultsPage = () => {
@@ -116,23 +115,22 @@ const ResultsPage = () => {
   const [warningError, setWarningError] = useState(false);
   const [affinityError, setAffinityError] = useState(null);
 
-  // const data = {
-  //   score: 67,
-  //   strengths: ['dasdasdasd', 'dasdasdasda'],
-  //   weaknesses: ['dasdasdasdas', 'dasdasdasd'],
-  //   warnings: ['dasdasdasdasdas'],
-  // };
+
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        console.log(user_id);
+
         const response = await axios.get(`/api/results/${user_id}`);
-        setUserData(response.data.data);
-        if (response.data.data.warnings) {
-          setWarningError(response.data.data.warnings);
+
+        setUserData(response.data);
+
+        if (response.data.warnings) {
+          setWarningError(response.data.warnings);
           setTimeout(() => {
             setWarningError(null);
-          }, 5000);
+          }, 10000);
         }
         setLoading(false);
       } catch (error) {
@@ -224,32 +222,35 @@ const ResultsPage = () => {
           </Button>
         </Grid>
         {warningError && (
-          <Alert
-            variant='filled'
-            severity='warning'
-            sx={{
-              position: 'fixed',
-              top: 5,
-              left: 0,
-              right: 0,
-              zIndex: 9999,
-              margin: '0 auto',
-              width: '30%',
-              borderRadius: '20px',
-              backgroundColor: '#FEDD5',
-              color: '#FEDD5',
-            }}
-          >
-            <Typography>{warningError[0]}</Typography>
-          </Alert>
-        )}
+    <Alert
+        variant='filled'
+        severity='warning'
+        sx={{
+            position: 'fixed',
+            top: 10,
+            left: 0,
+            right: 0,
+            zIndex: 9999,
+            margin: '0 auto',
+            width: '25%',
+            borderRadius: '20px',
+            backgroundColor: '#FEDD5',
+            color: '#FEDD5',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center' // remove this if you don't want to horizontally center the content
+        }}
+    >
+        <Typography>{warningError[0]}</Typography>
+    </Alert>
+)}
         {affinityError && (
           <Alert
             variant='filled'
             severity='warning'
             sx={{
               position: 'fixed',
-              top: 5,
+              top: 10,
               left: 0,
               right: 0,
               zIndex: 9999,
@@ -281,7 +282,7 @@ const ResultsPage = () => {
             severity='warning'
             sx={{
               position: 'fixed',
-              top: 5,
+              top: 10,
               left: 0,
               right: 0,
               zIndex: 9999,
@@ -298,26 +299,30 @@ const ResultsPage = () => {
           </Alert>
         ) : (
           <>
-            {warningError && (
-              <Alert
-                variant='filled'
-                severity='warning'
-                sx={{
-                  position: 'fixed',
-                  top: 5,
-                  left: 0,
-                  right: 0,
-                  zIndex: 9999,
-                  margin: '0 auto',
-                  width: '30%',
-                  borderRadius: '20px',
-                  backgroundColor: '#FEDD5',
-                  color: '#FEDD5',
-                }}
-              >
-                <Typography>{warningError[0]}</Typography>
-              </Alert>
-            )}
+{warningError && (
+    <Alert
+        variant='filled'
+        severity='warning'
+        sx={{
+            position: 'fixed',
+            top: 10,
+            left: 0,
+            right: 0,
+            zIndex: 9999,
+            margin: '0 auto',
+            width: '25%',
+            borderRadius: '20px',
+            backgroundColor: '#FEDD5',
+            color: '#FEDD5',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center' // remove this if you don't want to horizontally center the content
+        }}
+    >
+        <Typography>{warningError[0]}</Typography>
+    </Alert>
+)}
+
             <Grid item sx={classes.form_wrapper}>
               {userData ? (
                 <Result result={userData} />

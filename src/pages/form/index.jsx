@@ -207,7 +207,8 @@ const UserForm = () => {
           saveFormResponse.status === 200 &&
           preSeedScoreResponse.status === 200
         ) {
-          const userId = preSeedScoreResponse.data.userId;
+          const userId = preSeedScoreResponse.data.id;
+          console.log(preSeedScoreResponse);
           navigate(`/results/${userId}`);
         } else {
           throw new Error('Failed to save form or calculate preSeedScore');
@@ -233,13 +234,18 @@ const UserForm = () => {
 
   const handleMainButtonClick = async (event) => {
     setLoading(true);
-    if (event.currentTarget.name === 'mainButton' && isLastStep) {
+    if ( isLastStep) {
       try {
         await handleSubmit(formik.values,'mainButton');
       } finally {
         setLoading(false);
       }
     } else if (!isLastStep) {
+      try {
+        await handleSubmit(formik.values,'mainButton');
+      } finally {
+        
+      }
       setCurrentFormStep((prevStep) => prevStep + 1);
       selectMenuItem(currentFormStep + 1);
       setLoading(false);
@@ -253,6 +259,7 @@ const UserForm = () => {
       const response = await axios.post('/api/fetch_form', {
         clientId: Cookies.get('access_token'),
       });
+      console.log(response.status);
       if (response.status === 200 ) {
         console.log(response)
         const initialFormValues = response.data.formData;
@@ -339,10 +346,10 @@ const UserForm = () => {
     ctovccomp: '',
     ctoseniorvc: '',
     ctofounder: 0,
-    ctotop100: false,
-    ctodegree: false,
-    ctomba: false,
-    ctotechskills: false,
+    ctotop100: '',
+    ctodegree: '',
+    ctomba: '',
+    ctotechskills: '',
     ceoyrsexp: '',
     ceotechroles: '',
     ceosenior: '',
@@ -351,12 +358,12 @@ const UserForm = () => {
     ceovccomp: '',
     ceoseniorvc: '',
     ceofounder: 0,
-    ceotop100: false,
-    ceodegree: false,
-    ceomba: false,
-    ceophd: false,
-    ceoskills: false,
-    ceopromotion: false,
+    ceotop100: '',
+    ceodegree: '',
+    ceomba: '',
+    ceophd: '',
+    ceoskills: '',
+    ceopromotion: '',
   };
 
   const validationSchema = yup.object().shape({

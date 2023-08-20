@@ -39,11 +39,7 @@ const Login = ({ setOpenLoginDialog }) => {
   };
 
   const handleLoginSuccess = (credentialResponse) => {
-    // console.log("Usao sam ");
-    //console.log(credentialResponse);
     const idToken = credentialResponse.credential;
-    //console.log('Login process started.')
-    // console.log('Login ID - ', idToken)
     setLoading(true);
     axios
       .post(
@@ -64,20 +60,18 @@ const Login = ({ setOpenLoginDialog }) => {
             Cookies.set('access_token', accessToken, { expires: 1, path: '/' });
             setLoading(false);
             setOpenLoginDialog(false);
-            // console.log('Login success.')
-            //  console.log('Login success - access token: ', accessToken)
+            
+            window.location.href = '/';
           } else {
             Cookies.remove('name', { path: '/' });
             setLoading(false);
             setOpenLoginDialog(false);
-            // console.log('Login failed.1')
           }
         }
         if (res.status === 400) {
           Cookies.remove('name', { path: '/' });
           setLoading(false);
           setOpenLoginDialog(false);
-          //console.log('Login failed.2')
         }
       })
       .catch((err) => {
@@ -85,8 +79,6 @@ const Login = ({ setOpenLoginDialog }) => {
         setLoading(false);
 
         setError('Please use Episode1 account to sign in and try again.');
-        // console.log('Login failed.3')
-        // console.log(err);
       })
       .finally(() => {
         setLoading(false);

@@ -72,8 +72,8 @@ const MainMenu = ({
   const mobileMidLg = useMediaQuery(theme.breakpoints.down('midLg'));
 
   const handleImageClick = async (step) => {
-    await handleSubmit(formik.values); // Save the form data
-    selectMenuItem(step); // Set the desired step
+    await handleSubmit(formik.values); 
+    selectMenuItem(step); 
   };
 
   return (
