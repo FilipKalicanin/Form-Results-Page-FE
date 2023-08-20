@@ -116,12 +116,12 @@ const ResultsPage = () => {
   const [warningError, setWarningError] = useState(false);
   const [affinityError, setAffinityError] = useState(null);
 
-  const data = {
-    score: 67,
-    strengths: ['dasdasdasd', 'dasdasdasda'],
-    weaknesses: ['dasdasdasdas', 'dasdasdasd'],
-    warnings: ['dasdasdasdasdas'],
-  };
+  // const data = {
+  //   score: 67,
+  //   strengths: ['dasdasdasd', 'dasdasdasda'],
+  //   weaknesses: ['dasdasdasdas', 'dasdasdasd'],
+  //   warnings: ['dasdasdasdasdas'],
+  // };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -328,7 +328,6 @@ const ResultsPage = () => {
                   </Typography>
                 </Grid>
               )}
-              <Result result={data} />
             </Grid>
 
             <Grid
