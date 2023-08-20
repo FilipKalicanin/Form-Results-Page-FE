@@ -65,7 +65,7 @@ const MainPage = () => {
   const mobileMid = useMediaQuery(theme.breakpoints.down('sm'));
 
   // login dialog display
-  const [openLoginDialog, setOpenLoginDialog] = useState(true);
+  const [openLoginDialog, setOpenLoginDialog] = useState(false);
 
   useEffect(() => {
     if (openLoginDialog) {

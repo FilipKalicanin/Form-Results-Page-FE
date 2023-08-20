@@ -49,12 +49,16 @@ const Result = ({ result }) => {
           Results
         </Typography>
       </Grid>
-      <Grid item xs={12} sx={{ position: 'relative', padding: 'none' }}>
+      <Grid
+        item
+        xs={12}
+        sx={{ position: 'relative', padding: 'none', maxHeight: '250px' }}
+      >
         <SemiCircleProgress
           percentage={result.score ? result.score : 0}
           size={{
-            width: 250,
-            height: 200,
+            width: 300,
+            height: 300,
           }}
           fontStyle={{ fontSize: '16px', fill: '#047857' }}
           hasBackground={true}
@@ -62,6 +66,18 @@ const Result = ({ result }) => {
           strokeColor='#047857'
           bgStrokeColor='#E5E7EB'
         />
+        <Typography
+          sx={{
+            position: 'absolute',
+            top: 115,
+            left: 110,
+            fontSize: '28px',
+            fontWeight: 'bold',
+            color: '#000000',
+          }}
+        >
+          Score
+        </Typography>
       </Grid>
       <Grid item sx={{ width: '100%' }}>
         <Divider
